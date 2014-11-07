@@ -12,7 +12,7 @@ site.addsitedir(libdir)
 import new_walk
 reload(new_walk)
 
-files=new_walk.index('\Users\Morgen\Documents\GitHub\classcode\notebooks\cpsc189\notebooks')
+files=new_walk.index('folder_l1_0')
 
 def tree_to_csv(filename,filelist):
     with open(filename,'w') as f:
@@ -20,18 +20,19 @@ def tree_to_csv(filename,filelist):
         f.write('file_name;owner;size;modified\n')
         for the_line in filelist:
             thelevel=len(the_line[0].split(os.sep))-1
-            f.write("{:s};{:s};{:d};{:d};{;d}\n".format(*the_line,thelevel)
+            the_line=the_line + (thelevel,)
+            f.write("{:s};{:s};{:d};{:d};{:d}\n".format(*the_line))
 
 tree_to_csv('out.csv',files)
 
-import pandas as pd
+## import pandas as pd
 
-data=pd.read_csv('out.csv',sep=';')
-data
+## data=pd.read_csv('out.csv',sep=';')
+## data
 
-out=data.groupby('thelevel')
-    for thelevel, dflevel in out:
-        print thelevel,dflevel[site].sum()
-            for index, item in dflevel.iterrows():
-                indent=(thelevel-1)*'    '
-                print thelevel, item('filename')
+## out=data.groupby('thelevel')
+##     for thelevel, dflevel in out:
+##         print thelevel,dflevel[site].sum()
+##             for index, item in dflevel.iterrows():
+##                 indent=(thelevel-1)*'    '
+##                 print thelevel, item('filename')
